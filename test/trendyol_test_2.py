@@ -33,15 +33,14 @@ def get_links(html):
 
 def get_data(html):
     soup = BeautifulSoup(html, 'lxml')
-    href = soup.find('div', id='container').select('script')[1].text.split('window.__SEARCH_APP_INITIAL_STATE__ = ')[
+    href = soup.find('div', id='container').select('script')[1].text.split('window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
         -1].strip()
-    print(href)
     href = (json.loads(href[:-1]))
     return href
 
 
 def open_one_page():
-    url = "https://www.trendyol.com/mango-woman/kadin-siyah-kapakli-canta-p-6587327?boutiqueId=333091&merchantId=104723"
+    url = "https://www.trendyol.com/koton/kadin-yesil-trenckot-9kak06561ew-p-3812986"
     html = get_html(url)
     data = get_data(html)
     with open('item.json', 'w') as outfile:
@@ -56,12 +55,12 @@ def get_first_page():
         json.dump(data, outfile)
 
 
-def get_second_page():
-    url = "https://www.trendyol.com/mango?pi=2"
-    html = get_html(url)
-    data = get_data(html)
-    with open('second.json', 'w') as outfile:
-        json.dump(data, outfile)
+# def get_second_page():
+#     url = "https://www.trendyol.com/mango?pi=2"
+#     html = get_html(url)
+#     data = get_data(html)
+#     with open('second.json', 'w') as outfile:
+#         json.dump(data, outfile)
 
 
 def main():
@@ -78,8 +77,8 @@ def main():
     #
     # with open('links.json', 'w') as outfile:
     #     json.dump(all_links, outfile)
-    get_first_page()
-    get_second_page()
+    # get_first_page()
+    open_one_page()
 
 
 if __name__ == '__main__':
