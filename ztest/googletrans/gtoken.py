@@ -32,7 +32,7 @@ class TokenAcquirer(object):
     Example usage:
         >>> from googletrans.gtoken import TokenAcquirer
         >>> acquirer = TokenAcquirer()
-        >>> text = 'test'
+        >>> text = zztest
         >>> tk = acquirer.do(text)
         >>> tk
         950629.577246

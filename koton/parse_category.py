@@ -1,19 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import json
-import time
-from pprint import pprint
-from random import choice, randint
+from random import choice
 
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from constants import PROXIES, USERAGENTS
+from koton.constants import PROXIES, USERAGENTS
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+
 
 def get_html(url):
     proxy = {'http': 'http://' + choice(PROXIES)}
@@ -23,13 +21,14 @@ def get_html(url):
 
 
 def get_html1(url):
+    print(url)
     r = requests.get(url)
     return r.text
 
 
 def get_html_data(url):
     html = None
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome('c://chromedriver.exe')
     driver.get(url)
     timeout = 5
     try:
@@ -55,7 +54,7 @@ def parse_department_data(department):
         categories = []
         for i in data:
             context = {
-                'link': 'https://www.trendyol.com'+i['href'],
+                'link': 'https://www.trendyol.com' + i['href'],
                 'name': i.find('div', class_='fltr-item-text').text
             }
             categories.append(context)
@@ -72,11 +71,11 @@ def parse_brand_data(brand):
         soup = BeautifulSoup(html, 'lxml')
         data = []
         sizes = []
-        sizes_trendyol= []
+        sizes_trendyol = []
         colors = []
         colours = []
         sidebar = soup.find('div', id='container').find('div', id='search-app').find('div',
-                                                                                  class_='search-app-container') \
+                                                                                     class_='search-app-container') \
             .find('div', class_='srch-rslt-cntnt').find('div', class_='srch-aggrgtn-cntnr').find_all('div',
                                                                                                      class_='fltrs-wrppr')
         for j in sidebar:
@@ -98,7 +97,7 @@ def parse_brand_data(brand):
         departments = []
         for i in data:
             context = {
-                'link': 'https://www.trendyol.com'+i['href'],
+                'link': 'https://www.trendyol.com' + i['href'],
                 'name': i.find('div', class_='fltr-item-text').text
             }
             categories = parse_department_data(context)

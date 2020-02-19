@@ -10,8 +10,9 @@ def get_total_pages(html):
     print(soup)
 
 
+
 def main():
-    driver = webdriver.Chrome(executable_path=r'C:\chromedriver.exe')
+    driver = webdriver.PhantomJS(executable_path=r'C:\phantom\bin\phantomjs.exe')
     driver.get("https://www.trendyol.com/mango")
     last_height = driver.execute_script("return document.body.scrollHeight")
     count = 0
@@ -23,7 +24,7 @@ def main():
         driver.execute_script("window.scrollTo(0, %s);" % count)
 
         # Wait to load page
-        time.sleep(0.4)
+        time.sleep(2)
         # Calculate new scroll height and compare with last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         print(new_height, last_height)

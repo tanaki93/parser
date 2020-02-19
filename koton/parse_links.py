@@ -1,13 +1,11 @@
 import json
-import time
-from multiprocessing import Pool
+from multiprocessing.dummy import Pool
 from random import choice
-import random
 
 import requests
 from bs4 import BeautifulSoup
 
-from constants import PROXIES, USERAGENTS
+from koton.constants import PROXIES, USERAGENTS
 
 
 def get_html(url):
@@ -29,7 +27,11 @@ def get_categories_from_db(url):
 
 def get_pages_count(html):
     soup = BeautifulSoup(html, 'lxml')
-    href = soup.find('div', class_='srch-ttl-cntnr-wrppr').find('div', class_='dscrptn').text.split(' ')[-3]
+    href = 0
+    try:
+        href = soup.find('div', class_='srch-ttl-cntnr-wrppr').find('div', class_='dscrptn').text.split(' ')[-3]
+    except:
+        pass
     return int(href)
 
 
@@ -45,18 +47,21 @@ def get_links(count, link):
 def get_data_links(link):
     html = get_html(link)
     soup = BeautifulSoup(html, 'lxml')
-    data = soup.find('div', class_='prdct-cntnr-wrppr').find_all('div', class_='p-card-wrppr')
+    data = []
+    try:
+        data = soup.find('div', class_='prdct-cntnr-wrppr').find_all('div', class_='p-card-wrppr')
+    except:
+        pass
     links = []
     for i in data:
-        href = 'https://www.trendyol.com'+(i.find('a', class_='p-card-chldrn-cntnr')['href'].split('?')[0])
+        href = 'https://www.trendyol.com' + (i.find('a', class_='p-card-chldrn-cntnr')['href'].split('?')[0])
         links.append(href)
-        # print(href)
     return links
 
 
 def main():
-    url = 'http://188.120.242.218:8089/api/v1/project/categories/'
-    # url = 'http://127.0.0.1:8000/api/v1/project/categories/'
+    url = 'http://188.120.242.218:8089/api/v1/project/categories/?brand=koton'
+    # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=koton'
     categories = get_categories_from_db(url)
     all_links = []
     for category in categories:
@@ -79,12 +84,8 @@ def main():
         r = requests.post(url,
                           data=json.dumps(all_links), headers=headers)
         print(r.status_code)
-        with open('item.json', 'w') as outfile:
-            json.dump(all_links, outfile)
         all_links = []
-        time.sleep(3)
-
-
+        # time.sleep(3)
 
 
 if __name__ == '__main__':
