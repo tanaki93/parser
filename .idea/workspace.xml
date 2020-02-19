@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="de6e2d77-0eb5-46f1-a55f-adfe43bc8c38" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/collins/constants.py" afterDir="false" />
+    <list default="true" id="de6e2d77-0eb5-46f1-a55f-adfe43bc8c38" name="Default Changelist" comment="added new parser spiders">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collins/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/collins/update_products.py" afterDir="false" />
     </list>
@@ -37,15 +36,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Projects\Python\parser\ztest" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\Python\parser\collins" />
+      <recent name="D:\Projects\Python\parser\zara" />
+      <recent name="D:\Projects\Python\parser\handm" />
       <recent name="D:\Projects\Python\parser\test" />
       <recent name="D:\Projects\Python\parser\koton" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\Python\parser\zara" />
-      <recent name="D:\Projects\Python\parser\collins" />
-      <recent name="D:\Projects\Python\parser\handm" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\Python\parser\ztest" />
       <recent name="D:\Projects\Python\parser\test" />
       <recent name="D:\Projects\Python\parser\koton" />
     </key>
@@ -237,7 +236,7 @@
       <workItem from="1581936168506" duration="385000" />
       <workItem from="1581946635117" duration="56000" />
       <workItem from="1582025801047" duration="9834000" />
-      <workItem from="1582118043400" duration="2273000" />
+      <workItem from="1582118043400" duration="2517000" />
     </task>
     <task id="LOCAL-00001" summary="added new parser spiders">
       <created>1582118391418</created>
@@ -260,7 +259,28 @@
       <option name="project" value="LOCAL" />
       <updated>1582121025759</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added new parser spiders">
+      <created>1582121470221</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1582121470221</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added new parser spiders">
+      <created>1582121547550</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1582121547550</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added new parser spiders">
+      <created>1582121634843</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1582121634843</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,10 +308,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582118348366" />
-    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582121546681">
+    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582121705111">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121546681" />
+    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121705111" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581946689070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -332,10 +352,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1582120749838" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582121549394">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582121637826">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121549394" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121637826" />
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1582118045815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

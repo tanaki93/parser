@@ -468,7 +468,6 @@ def get_data(context):
         cont['product'] = product
     except:
         cont['product'] = None
-        print(context['url'])
         pass
     return cont
 
