@@ -493,6 +493,5 @@ def main():
         print(r.status_code)
         all_products = []
 
-
 if __name__ == '__main__':
     main()
