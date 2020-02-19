@@ -3,12 +3,10 @@
 import json
 from datetime import datetime
 from multiprocessing.dummy import Pool
-from pprint import pprint
 from random import choice
 
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
 
 PROXIES = [
   "103.253.147.9:8080",

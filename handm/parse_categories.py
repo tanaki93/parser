@@ -51,9 +51,6 @@ def main():
     # url = 'http://127.0.0.1:8000/api/v1/project/brands/handm/'
     html = get_html1(url)
     zara = json.loads(html)
-    headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-    r = requests.post(url, data=json.dumps(data), headers=headers)
-    print(r.status_code)
 
 
 if __name__ == '__main__':

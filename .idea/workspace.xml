@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de6e2d77-0eb5-46f1-a55f-adfe43bc8c38" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/massimo/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/massimo/parse_categories.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/massimo/parse_links.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/massimo/parse_products.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/massimo/update_products.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handm/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/handm/update_products.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/koton/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/koton/update_products.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zara/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/zara/update_products.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collins/constants.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collins/parse_categories.py" beforeDir="false" afterPath="$PROJECT_DIR$/collins/parse_categories.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handm/parse_categories.py" beforeDir="false" afterPath="$PROJECT_DIR$/handm/parse_categories.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +39,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/collins" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../izi-backend" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\Python\parser" />
       <recent name="D:\Projects\Python\parser\collins" />
       <recent name="D:\Projects\Python\parser\zara" />
       <recent name="D:\Projects\Python\parser\handm" />
       <recent name="D:\Projects\Python\parser\test" />
-      <recent name="D:\Projects\Python\parser\koton" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\Python\parser\ztest" />
@@ -51,8 +56,8 @@
       <recent name="D:\Projects\Python\parser\koton" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.update_products (2)">
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.parse_categories">
+    <configuration name="parse_categories" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parser" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -60,12 +65,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ztest" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/massimo" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ztest/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/massimo/parse_categories.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -164,11 +169,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.parse_categories" />
         <item itemvalue="Python.update_products (2)" />
         <item itemvalue="Python.update_products (1)" />
         <item itemvalue="Python.update_products" />
         <item itemvalue="Python.update_products (3)" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -238,7 +243,7 @@
       <workItem from="1581936168506" duration="385000" />
       <workItem from="1581946635117" duration="56000" />
       <workItem from="1582025801047" duration="9834000" />
-      <workItem from="1582118043400" duration="2826000" />
+      <workItem from="1582118043400" duration="8409000" />
     </task>
     <task id="LOCAL-00001" summary="added new parser spiders">
       <created>1582118391418</created>
@@ -296,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582121725184</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added new parser spiders">
+      <created>1582122100144</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1582122100144</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,30 +336,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582118348366" />
-    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582121724424">
+    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582122098997">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121724424" />
-    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581946689070">
+    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582122098997" />
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1582123663865">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581946689070" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1582053361326">
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1582123663865" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1582127667758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582053361326" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1582053361326">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582127667758" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1582127667758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582053361326" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1582053361326">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582127667758" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1582127667758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582053361326" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1582053361326">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582127667758" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1582127667758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582053361326" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582127667758" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581422072186">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -368,10 +380,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1582120749838" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582121728523">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582122102958">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121728523" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582122102958" />
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1582118045815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -398,7 +410,7 @@
     <SUITE FILE_PATH="coverage/parser$parse_products.coverage" NAME="parse_products Coverage Results" MODIFIED="1580253132789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/zara" />
     <SUITE FILE_PATH="coverage/parser$parse_links.coverage" NAME="parse_links Coverage Results" MODIFIED="1580253121242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/zara" />
     <SUITE FILE_PATH="coverage/parser$trendyol_test_1.coverage" NAME="trendyol_test_1 Coverage Results" MODIFIED="1578078658422" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/parser$parse_categories.coverage" NAME="parse_categories Coverage Results" MODIFIED="1578499320738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/collins" />
+    <SUITE FILE_PATH="coverage/parser$parse_categories.coverage" NAME="parse_categories Coverage Results" MODIFIED="1582127667745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/massimo" />
     <SUITE FILE_PATH="coverage/parser$parse_categories__1_.coverage" NAME="parse_categories (1) Coverage Results" MODIFIED="1578388041296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/handm" />
     <SUITE FILE_PATH="coverage/parser$parser_txt.coverage" NAME="parser_txt Coverage Results" MODIFIED="1579057267365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
   </component>
