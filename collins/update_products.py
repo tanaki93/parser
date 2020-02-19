@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
 import json
+from datetime import datetime
 from multiprocessing.dummy import Pool
 from random import choice
 
@@ -13,8 +14,6 @@ def get_html(url):
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
     r = requests.get(url, headers=useragent, proxies=proxy)
-    print(url)
-    print()
     return r.text
 
 
@@ -95,7 +94,7 @@ def main():
     # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=collins'
     links = get_categories_from_db(url)
     length = (len(links))
-    print(length)
+    print(length, datetime.now())
     ranges = length // 40 + 1
     all_products = []
     for i in range(ranges):

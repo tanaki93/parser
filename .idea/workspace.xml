@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de6e2d77-0eb5-46f1-a55f-adfe43bc8c38" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ztest/a.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collins/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/collins/update_products.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +49,7 @@
       <recent name="D:\Projects\Python\parser\koton" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.update_products (1)">
+  <component name="RunManager" selected="Python.update_products (2)">
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parser" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -162,10 +162,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.update_products (2)" />
         <item itemvalue="Python.update_products (1)" />
         <item itemvalue="Python.update_products" />
         <item itemvalue="Python.update_products (3)" />
-        <item itemvalue="Python.update_products (2)" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -236,7 +236,7 @@
       <workItem from="1581936168506" duration="385000" />
       <workItem from="1581946635117" duration="56000" />
       <workItem from="1582025801047" duration="9834000" />
-      <workItem from="1582118043400" duration="639000" />
+      <workItem from="1582118043400" duration="1830000" />
     </task>
     <task id="LOCAL-00001" summary="added new parser spiders">
       <created>1582118391418</created>
@@ -245,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582118391418</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added new parser spiders">
+      <created>1582118703806</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1582118703806</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,10 +280,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582118348366" />
-    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582118389628">
+    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582118702984">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582118389628" />
+    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582118702984" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581946689070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -313,10 +320,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581422072185" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582118393845">
+    <state x="461" y="163" key="SettingsEditor" timestamp="1582120749838">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582118393845" />
+    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1582120749838" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582118705380">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582118705380" />
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1582118045815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -338,7 +349,7 @@
     <SUITE FILE_PATH="coverage/parser$l.coverage" NAME="l Coverage Results" MODIFIED="1579057502898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/koton" />
     <SUITE FILE_PATH="coverage/parser$update_products__3_.coverage" NAME="update_products (3) Coverage Results" MODIFIED="1582026839532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/zara" />
     <SUITE FILE_PATH="coverage/parser$parse_products__2_.coverage" NAME="parse_products (2) Coverage Results" MODIFIED="1579053570586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/handm" />
-    <SUITE FILE_PATH="coverage/parser$update_products__2_.coverage" NAME="update_products (2) Coverage Results" MODIFIED="1582025811097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/collins" />
+    <SUITE FILE_PATH="coverage/parser$update_products__2_.coverage" NAME="update_products (2) Coverage Results" MODIFIED="1582121009677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/collins" />
     <SUITE FILE_PATH="coverage/parser$s.coverage" NAME="s Coverage Results" MODIFIED="1576093034925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/parser$parse_products.coverage" NAME="parse_products Coverage Results" MODIFIED="1580253132789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/zara" />
     <SUITE FILE_PATH="coverage/parser$parse_links.coverage" NAME="parse_links Coverage Results" MODIFIED="1580253121242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/zara" />
