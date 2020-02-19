@@ -2,58 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de6e2d77-0eb5-46f1-a55f-adfe43bc8c38" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/collins/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/collins/parse_categories.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/collins/parse_links.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/collins/parse_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/collins/update_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handm/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handm/parse_categories.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handm/parse_links.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handm/parse_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handm/update_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/koton/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/koton/parse_links.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/koton/update_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zara/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zara/parse_categories.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zara/parse_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zara/update_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ztest/PaySample.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ztest/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ztest/handm_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ztest/handm_test1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ztest/l.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ztest/parser_txt.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ztest/post.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ztest/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/parser.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/parser.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ztest/a.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/koton/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/adapters.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/adapters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/compat.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/compat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/gtoken.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/gtoken.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/googletrans/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/googletrans/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/koton/parse_category.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_links.py" beforeDir="false" afterPath="$PROJECT_DIR$/zara/parse_links.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/koton/parse_products.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proxies.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/parser_txt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/proxies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/proxies.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/trendyol_test_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/trendyol_test_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/trendyol_test_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/trendyol_test_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/useragents.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ztest/useragents.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/useragents.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,8 +236,16 @@
       <workItem from="1581936168506" duration="385000" />
       <workItem from="1581946635117" duration="56000" />
       <workItem from="1582025801047" duration="9834000" />
-      <workItem from="1582118043400" duration="316000" />
+      <workItem from="1582118043400" duration="639000" />
     </task>
+    <task id="LOCAL-00001" summary="added new parser spiders">
+      <created>1582118391418</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1582118391418</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,11 +264,19 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added new parser spiders" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new parser spiders" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1582118348366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582118348366" />
+    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582118389628">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582118389628" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581946689070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -347,6 +313,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581422072185" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582118393845">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582118393845" />
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1582118045815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
