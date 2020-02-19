@@ -7,7 +7,8 @@ from random import choice
 
 import requests
 from bs4 import BeautifulSoup
-from koton.constants import PROXIES, USERAGENTS
+
+from .constants import PROXIES, USERAGENTS
 
 
 def get_html(url):
