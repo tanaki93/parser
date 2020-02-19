@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="de6e2d77-0eb5-46f1-a55f-adfe43bc8c38" name="Default Changelist" comment="added new parser spiders">
+    <list default="true" id="de6e2d77-0eb5-46f1-a55f-adfe43bc8c38" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collins/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/collins/update_products.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handm/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/handm/update_products.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/koton/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/koton/update_products.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zara/update_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/zara/update_products.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +238,7 @@
       <workItem from="1581936168506" duration="385000" />
       <workItem from="1581946635117" duration="56000" />
       <workItem from="1582025801047" duration="9834000" />
-      <workItem from="1582118043400" duration="2517000" />
+      <workItem from="1582118043400" duration="2826000" />
     </task>
     <task id="LOCAL-00001" summary="added new parser spiders">
       <created>1582118391418</created>
@@ -280,7 +282,21 @@
       <option name="project" value="LOCAL" />
       <updated>1582121634843</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added new parser spiders">
+      <created>1582121715556</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1582121715556</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added new parser spiders">
+      <created>1582121725184</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1582121725184</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,10 +324,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582118348366" />
-    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582121714773">
+    <state x="515" y="115" key="CommitChangelistDialog2" timestamp="1582121724424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121714773" />
+    <state x="515" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121724424" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581946689070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -352,10 +368,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1582120749838" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582121637826">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1582121728523">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121637826" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1582121728523" />
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1582118045815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
