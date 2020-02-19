@@ -8,7 +8,7 @@ from random import choice
 import requests
 from bs4 import BeautifulSoup
 
-from .constants import PROXIES, USERAGENTS
+from collins.constants import PROXIES, USERAGENTS
 
 
 def get_html(url):
