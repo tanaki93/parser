@@ -398,6 +398,7 @@ USERAGENTS = [
 
 
 def get_html(url):
+    print(url)
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
     r = requests.get(url, headers=useragent, proxies=proxy)
@@ -423,7 +424,8 @@ def get_data(context):
     category_id = url.split('category_id=')[1].split('&')[0]
     colour_id = url.split('colorId=')[1].split('&category_id=')[0]
     product_id = url.split('%s' % category_id)[1].split('.html')[0][1:]
-    product_json_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/category/0/product/%s/detail?languageId=-43&appId=2' % product_id
+    product_json_url = 'https://www.bershka.com/itxrest/2/catalog/store/44109521/40259537/category/0/product/%s/detail?languageId=-43&appId=2' %product_id
+    # product_json_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/category/0/product/%s/detail?languageId=-43&appId=2' % product_id
     html = get_html(product_json_url)
     json_data = json.loads(html)
     cont['name'] = json_data['name']
@@ -431,15 +433,14 @@ def get_data(context):
     cont['product_id'] = product_id
     cont['product_code'] = product_id
     cont['description'] = json_data['detail']['longDescription']
-    static = 'https://static.massimodutti.net/3/photos'
+    static = 'https://static.bershka.net/4/photos2'
     medias = json_data['detail']['xmedia']
     images = []
     for media in medias:
-        if media['colorCode'] == str(colour_id):
+        if int(media['colorCode']) == int(colour_id):
             path = static + media['path'] + '/'
-            for xmedia in media['xmediaItems'][0]['medias']:
-                image = path + xmedia['idMedia'] + '16.jpg?t=' + str(
-                    xmedia['timestamp']) + '&impolicy=massimodutti-itxmedium&imwidth=700'
+            for xmedia in media['xmediaLocations'][0]['locations'][0]['mediaLocations']:
+                image = path + xmedia + '0.jpg'
                 images.append(image)
             break
     image_text = ''
@@ -452,7 +453,7 @@ def get_data(context):
             cont['colour'] = color['name']
             product_sizes = color['sizes']
             break
-    stock_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/product/%s/stock?languageId=-43&appId=2' % product_id
+    stock_url = 'https://www.bershka.com/itxrest/2/catalog/store/44109521/40259537/product/%s/stock?languageId=-43&appId=2'% product_id
     stock_json = get_html(stock_url)
     stock_data = json.loads(stock_json)
     sizes = []
@@ -465,6 +466,8 @@ def get_data(context):
                         stock_bool = False
                         if product_stock['availability'] == 'in_stock':
                             stock_bool = True
+                        else:
+                            continue
                         size = {
                             "value": product_size['name'],
                             'stock': stock_bool
@@ -473,32 +476,36 @@ def get_data(context):
                         if int(product_size['price']) / 100 > price:
                             price = int(product_size['price']) / 100
         break
-    cont['sizes'] = sizes
+    data_size = []
+    for i in sizes:
+        if i not in data_size:
+            data_size.append(i)
+    cont['sizes'] = data_size
+    if len(data_size) == 0:
+        cont['stock'] = False
     cont['selling_price'] = price
     cont['discount_price'] = price
     cont['original_price'] = price
     product_dict['product'] = cont
-    print(context['url'])
     return product_dict
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=massimo'
-    # data_url = 'https://www.massimodutti.com/tr/kadin/koleksi̇yon/gömlek---bluz/saten-gömlek/100-silk-shirt-with-pockets-c1759519p8812769.html?colorId=818&category_id=1759519'
-    # print(get_data({'url': data_url, 'id': 1}))
+    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=bershka'
+    # data_url = 'https://www.bershka.com/tr/erkek/koleksi%CC%87yon/ceket/naylon/kap%C3%BC%C5%9Fonlu-%C5%9Fi%C5%9Fme-mont-c1010313016p102298758.html?category_id=1010313016&colorId=250'
+    # pprint(get_data({'url': data_url, 'id': 1}))
     links = get_categories_from_db(url)
     length = (len(links))
-    length = length//2
-    links = links[0:length+1]
     print(length, datetime.now())
     ranges = length // 40 + 1
     all_products = []
     for i in range(ranges):
         print(i)
         range_links = (links[i * 40: (i + 1) * 40])
-        for k in range_links:
-            all_products.append(get_data(k))
-            time.sleep(random.uniform(1, 3))
+        with Pool(40) as p:
+            data = p.map(get_data, range_links)
+            all_products.extend(data)
+            # time.sleep(random.uniform(1, 3))
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
