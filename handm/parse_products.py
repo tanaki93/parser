@@ -9,7 +9,6 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
-from googletrans import Translator
 
 from koton.constants import PROXIES, USERAGENTS
 
@@ -32,11 +31,6 @@ def get_categories_from_db(url):
     html = get_html1(url)
     return json.loads(html)
 
-
-def translate_text(text):
-    translator = Translator(service_urls=['translate.google.com.tr'])
-    data = u'' + translator.translate(text, dest='ru').text
-    return data
 
 
 def get_data(context):
@@ -65,17 +59,46 @@ def get_data(context):
         sizes = []
         li = soup.find('main').find('div', class_='product parbase')
         scripts = li.find('script')
-        data = (scripts.text.replace('\r', '').replace('\n', '').replace('\t', '').replace(' ', '').strip().split('\'sizes\''))
+        data = (scripts.text.replace('\r', '').replace('\n', '').replace('\t', '').replace(' ', '').strip().split(
+            '\'sizes\''))
+
         data = data[1:]
-        for i in data:
+        for i in data[:-1]:
             text = i[1:]
             index = text.find(']')
-            js = json.loads(text[0:index+1].replace('\'', '\"'))
-            for j in js:
-                if cont['product_code']+j['size'] == j['sizeCode']:
-                    size = {'value': j['name'], 'stock': True}
-                    sizes.append(size)
-        cont['sizes'] = sizes
+            try:
+                js = json.loads(text[0:index + 1].replace('\'', '\"'))
+                for j in js:
+                    if cont['product_code'] + j['size'] == j['sizeCode']:
+                        size = {'value': j['name'], 'stock': False, 'code': j['sizeCode']}
+                        sizes.append(size)
+            except:
+                pass
+        service = 'https://www2.hm.com/hmwebservices/service/product/tr/availability/%s.json' % cont['product_code'][
+                                                                                                0:-3]
+        h = get_html(service)
+        n = BeautifulSoup(h, 'lxml')
+        size_data = (json.loads(n.text))
+        new_sizes = []
+        for i in size_data['availability']:
+            for j in sizes:
+                if j['code'] == i:
+                    new_sizes.append(i)
+                    break
+        available = []
+        count = len(new_sizes)
+        for i in sizes:
+            flag = 0
+            for j in new_sizes:
+                if i['code'] == j:
+                    continue
+                else:
+                    flag += 1
+            if flag != count and i not in available:
+                available.append({'value': i['value'], 'stock': True, 'code': i['code']})
+            else:
+                available.append({'value': i['value'], 'stock': False, 'code': i['code']})
+        cont['sizes'] = available
     except:
         pass
     product['product'] = cont
@@ -83,13 +106,13 @@ def get_data(context):
 
 
 def main():
-    url = 'http://188.120.242.218:8089/api/v1/project/links/?brand=handm'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=handm'
     # context = {
     #     'id': 1,
-    #     'url':'https://www2.hm.com/tr_tr/productpage.0827635001.html'
+    #     'url':'https://www2.hm.com/tr_tr/productpage.0738736001.html'
     # }
     # product = get_data(context)
-    # print(product)
+    # pprint(product)
     # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=handm'
     links = get_categories_from_db(url)
     length = (len(links))

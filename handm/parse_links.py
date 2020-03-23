@@ -44,6 +44,9 @@ def get_data_links(category):
             product = i.find('article').find('div', class_='item-details').find('ul').find_all('li')
             for j in product:
                 link = 'https://www2.hm.com' + j.find('a')['href']
+                url = link.split('/')
+                if url[3] == 'm':
+                    link = 'https://www2.hm.com/tr_tr/%s' % (url[-1])
                 all_links.append(link)
     except:
         pass
@@ -52,12 +55,12 @@ def get_data_links(category):
 
 
 def main():
-    url = 'http://188.120.242.218:8089/api/v1/project/categories/?brand=handm'
-    # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=handm'
+    # url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=handm'
+    url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=handm'
     categories = get_categories_from_db(url)
     all_links = []
     count = 0
-    for category in categories:
+    for category in categories[1:]:
         count += 1
         print(count)
         l = [category]
@@ -66,6 +69,7 @@ def main():
             for i in data:
                 all_links.append(i)
             headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
+            print(len(all_links))
             r = requests.post(url,
                               data=json.dumps(all_links), headers=headers)
             print(r.status_code)

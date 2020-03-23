@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
 import json
+import random
+import time
 from datetime import datetime
 from multiprocessing.dummy import Pool
+from pprint import pprint
 from random import choice
 
 import requests
@@ -395,11 +398,10 @@ USERAGENTS = [
 
 
 def get_html(url):
-    # print(url)
+    print(url)
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
     r = requests.get(url, headers=useragent, proxies=proxy)
-    # r.raise_for_status()
     return r.text
 
 
@@ -414,88 +416,98 @@ def get_categories_from_db(url):
 
 
 def get_data(context):
-    cont = None
-    product = {
+    product_dict = {
         'id': context['id']
     }
+    cont = {}
+    url = context['url']
+    category_id = url.split('category_id=')[1].split('&')[0]
+    colour_id = url.split('colorId=')[1].split('&category_id=')[0]
+    product_id = url.split('%s' % category_id)[1].split('.html')[0][1:]
+    product_json_url = 'https://www.stradivarius.com/itxrest/2/catalog/store/54009571/50331081/category/0/product/%s/detail?languageId=-43&appId=2' %product_id
+    # product_json_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/category/0/product/%s/detail?languageId=-43&appId=2' % product_id
+    html = get_html(product_json_url)
+    json_data = json.loads(html)
+    cont['name'] = json_data['name']
+    cont['stock'] = True
+    cont['product_id'] = product_id
+    cont['product_code'] = product_id
+    cont['description'] = json_data['detail']['longDescription']
+    images = []
     try:
-        cont = {}
-        url = context['url']
-        html = get_html(url)
-        soup = BeautifulSoup(html, 'lxml')
-        scripts = json.loads(soup.find('script', type='application/ld+json').text)
-        cont['product_code'] = scripts['sku']
-        cont['selling_price'] = float(scripts['offers'][0]['price'])
-        cont['original_price'] = float(scripts['offers'][0]['price'])
-        cont['images'] = scripts['image']
-        if scripts['offers'][0]['availability'] == 'http://schema.org/InStock':
-            stock = True
-        else:
-            stock = False
-        cont['stock'] = stock
-        sizes = []
-        li = soup.find('main').find('div', class_='product parbase')
-        scripts = li.find('script')
-        data = (scripts.text.replace('\r', '').replace('\n', '').replace('\t', '').replace(' ', '').strip().split(
-            '\'sizes\''))
-        data = data[1:]
-        for i in data:
-            text = i[1:]
-            index = text.find(']')
-            try:
-                js = json.loads(text[0:index + 1].replace('\'', '\"'))
-                for j in js:
-                    if cont['product_code'] + j['size'] == j['sizeCode']:
-                        size = {'value': j['name'], 'stock': False, 'code': j['sizeCode']}
-                        sizes.append(size)
-            except:
-                pass
-        service = 'https://www2.hm.com/hmwebservices/service/product/tr/availability/%s.json' % cont['product_code'][
-                                                                                                0:-3]
-        h = get_html(service)
-        n = BeautifulSoup(h, 'lxml')
-        size_data = (json.loads(n.text))
-        new_sizes = []
-        for i in size_data['availability']:
-            for j in sizes:
-                if j['code'] == i:
-                    new_sizes.append(i)
-                    break
-        available = []
-        count = len(new_sizes)
-        for i in sizes:
-            flag = 0
-            for j in new_sizes:
-                if i['code'] == j:
-                    continue
-                else:
-                    flag += 1
-            if flag != count and i not in available:
-                available.append({'value': i['value'], 'stock': True, 'code': i['code']})
-            else:
-                available.append({'value': i['value'], 'stock': False, 'code': i['code']})
-        cont['sizes'] = available
+        static = 'https://static.e-stradivarius.net/5/photos3'
+        medias = json_data['detail']['xmedia']
+
+        for media in medias:
+            if int(media['colorCode']) == int(colour_id):
+                path = static + media['path'] + '/'
+                for xmedia in media['xmediaLocations'][0]['locations'][1]['mediaLocations']:
+                    image = path + xmedia + '1.jpg'
+                    images.append(image)
+                break
     except:
         pass
-    product['product'] = cont
-    return product
+    image_text = ''
+    for image in images:
+        image_text = image_text + image + ' '
+    cont['images'] = image_text
+    product_sizes = []
+    for color in json_data['detail']['colors']:
+        if color['id'] == str(colour_id):
+            cont['colour'] = color['name']
+            product_sizes = color['sizes']
+            break
+    stock_url = 'https://www.stradivarius.com/itxrest/2/catalog/store/54009571/50331081/product/%s/stock?languageId=-43&appId=2'% product_id
+    stock_json = get_html(stock_url)
+    stock_data = json.loads(stock_json)
+    sizes = []
+    price = 0
+    for stock in stock_data['stocks']:
+        if stock['productId'] == int(product_id):
+            for product_stock in stock['stocks']:
+                for product_size in product_sizes:
+                    if product_size['sku'] == product_stock['id']:
+                        stock_bool = False
+                        if product_stock['availability'] == 'in_stock':
+                            stock_bool = True
+                        else:
+                            continue
+                        size = {
+                            "value": product_size['name'],
+                            'stock': stock_bool
+                        }
+                        sizes.append(size)
+                        if int(product_size['price']) / 100 > price:
+                            price = int(product_size['price']) / 100
+        break
+    data_size = []
+    for i in sizes:
+        if i not in data_size:
+            data_size.append(i)
+    cont['sizes'] = data_size
+    if len(data_size) == 0:
+        cont['stock'] = False
+    cont['selling_price'] = price
+    cont['discount_price'] = price
+    cont['original_price'] = price
+    product_dict['product'] = cont
+    return product_dict
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=handm'
-    # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=handm'
+    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=stradivarius'
     links = get_categories_from_db(url)
     length = (len(links))
     print(length, datetime.now())
     ranges = length // 40 + 1
     all_products = []
     for i in range(ranges):
+        print(i)
         range_links = (links[i * 40: (i + 1) * 40])
-        if range_links:
-            with Pool(20) as p:
-                data = (p.map(get_data, range_links))
-                all_products.extend(data)
-
+        with Pool(40) as p:
+            data = p.map(get_data, range_links)
+            all_products.extend(data)
+            time.sleep(random.uniform(1, 3))
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)

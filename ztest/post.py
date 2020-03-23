@@ -1,48 +1,38 @@
 import json
 
 import requests
+
+# headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 #
-headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-#
-# url = 'http://188.120.242.218:8089/api/v1/main/checkout/'
+# url = 'http://127.0.0.1:8000/api/v1/main/order/'
 # myobj = {
-#     'products_price': '1000',
-#     'total_price': '1000',
-#     'shipping_price': '1000',
-#     'products': [{'product_id': 75227,
-#                   'size_id': 157,
-#                   'amount': 1,
-#                   'price': 1000}, ],
+#     'phone': '+996700161629',
+#     'price': '300',
+#     'address': 'ul. Frunze 22',
+#     'lat': 42.872008,
+#     'lng': 74.590787,
+#     'items': [{'food_id': 4,
+#                'amount': 1,
+#                'price': 150},
+#               {'food_id': 5,
+#                'amount': 1,
+#                'price': 150},
+#               ],
 # }
 #
 # x = requests.post(url, data=json.dumps(myobj), headers=headers)
 #
 # print(x.text)
 
-import requests
+from decimal import Decimal
+
+from yandex_geocoder import Client
 
 
-def telegram_bot_sendtext(bot_message):
-    url = 'https://api.telegram.org/bot1097337743:AAHQ4aOXQrTsDO3ZlzHVeUcjA77Ys_4VlMg/getUpdates'
-    x = requests.get(url)
-    print(x.text)
-    n = json.loads(x.text)
-    l = []
-    for i in n['result']:
-        chat = i['message']['chat']['id']
-        if chat not in l:
-            l.append(chat)
+client = Client("9c36b1b7-d684-47cb-975e-77d6277ebfdb")
 
-    print(l)
-    for j in l:
-        bot_chatID = '%s'%j
-        bot_token = '1097337743:AAHQ4aOXQrTsDO3ZlzHVeUcjA77Ys_4VlMg'
-        send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=HTML&text=' + bot_message
-        response = requests.get(send_text)
-        print(response.json())
+coordinates = client.coordinates("Москва Льва Толстого 16")
+assert coordinates == (Decimal("37.587093"), Decimal("55.733969"))
 
-    return ''
-
-
-text = '<b>Заказ № 536546576234365 оплачен</b>\n <a href=\"https://admin.izishop.kg/orders/112\">Ссылка: https://admin.izishop.kg/orders/112</a>\n <i>Сумма заказа: 2200</i>'
-telegram_bot_sendtext(text)
+address = client.address(Decimal("37.587093"), Decimal("55.733969"))
+assert address == "Россия, Москва, улица Льва Толстого, 16"

@@ -34,7 +34,7 @@ def get_data_links(category):
         'category_id': category['id']
     }
     category_links = []
-    html = get_html(link)
+    html = get_html1(link)
     soup = BeautifulSoup(html, 'lxml')
     data = None
     try:
@@ -56,7 +56,7 @@ def get_data_links(category):
 
 
 def main():
-    url = 'http://188.120.242.218:8089/api/v1/project/categories/?brand=zara'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=zara'
     # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=zara'
     categories = get_categories_from_db(url)
     all_links = []
@@ -64,13 +64,13 @@ def main():
         data = (p.map(get_data_links, categories))
         for i in data:
             all_links.extend(i)
-    pprint(all_links)
-    headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-    r = requests.post(url,
-                      data=json.dumps(all_links), headers=headers)
-    print(r.status_code)
-    with open('item.json', 'w') as outfile:
-        json.dump(all_links, outfile)
+        pprint(len(all_links))
+        with open('item.json', 'w') as outfile:
+            json.dump(all_links, outfile)
+        headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
+        r = requests.post(url,
+                          data=json.dumps(all_links), headers=headers)
+        print(r.status_code)
 
 
 if __name__ == '__main__':

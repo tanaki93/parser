@@ -39,12 +39,15 @@ def get_data(context):
         script = main_data.find('script').contents[0]
         script = json.loads(script, strict=False)
         images_data = main_data.find('div', class_='product-images-section _product-images-section') \
-            .find('div', class_='big-image-container _big-image-container').find('div', id='main-images').find_all('div',
-                                                                                                                   class_='media-wrap')
+            .find('div', class_='big-image-container _big-image-container').find('div', id='main-images').find_all(
+            'div',
+            class_='media-wrap')
         images = []
         form = main_data.find('form')
         sizes = []
-        colour = main_data.find('div', class_='info-section').find('div', class_='product-info-wrapper _product-info').find('p').find('span', class_='_colorName').text
+        colour = main_data.find('div', class_='info-section').find('div',
+                                                                   class_='product-info-wrapper _product-info').find(
+            'p').find('span', class_='_colorName').text
         for i in (form.find('div', class_='size-select _size-select').find_all('label', class_='product-size')):
             input = i.find('div', class_='aria-size-input').find('input')
             size = {
@@ -79,7 +82,7 @@ def get_data(context):
 
 
 def main():
-    url = 'http://188.120.242.218:8089/api/v1/project/links/?brand=zara'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=zara'
     # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=zara'
     links = get_categories_from_db(url)
     length = (len(links))
@@ -98,6 +101,7 @@ def main():
                           data=json.dumps(all_products), headers=headers)
         print(r.status_code)
         all_products = []
+
 
 if __name__ == '__main__':
     main()

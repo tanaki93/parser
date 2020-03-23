@@ -6,7 +6,6 @@ from random import choice
 
 import requests
 from bs4 import BeautifulSoup
-from googletrans import Translator
 
 from koton.constants import PROXIES, USERAGENTS
 
@@ -27,11 +26,6 @@ def get_categories_from_db(url):
     html = get_html1(url)
     return json.loads(html)
 
-
-def translate_text(text):
-    translator = Translator(service_urls=['translate.google.com.tr'])
-    data = u'' + translator.translate(text, dest='ru').text
-    return data
 
 
 def get_data(context):
@@ -98,7 +92,7 @@ def get_data(context):
 
 
 def main():
-    url = 'http://188.120.242.218:8089/api/v1/project/links/?brand=collins'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=collins'
     # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=collins'
     links = get_categories_from_db(url)
     length = (len(links))
