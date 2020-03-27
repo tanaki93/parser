@@ -3,7 +3,6 @@
 import json
 from datetime import datetime
 from multiprocessing.dummy import Pool
-from pprint import pprint
 from random import choice
 
 import requests
@@ -396,11 +395,11 @@ USERAGENTS = [
 
 
 def get_html(url):
-    print(url)
+    # print(url)
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
+    # print(proxy)
     r = requests.get(url, headers=useragent, proxies=proxy)
-    # r.raise_for_status()
     return r.text
 
 
@@ -415,77 +414,27 @@ def get_categories_from_db(url):
 
 
 def get_data(context):
-    cont = None
-    product = {
-        'id': context['id']
-    }
+    cont = {}
     try:
-        cont = {}
-        url = context['url']
-        html = get_html(url)
+        html = get_html(context['url'])
         soup = BeautifulSoup(html, 'lxml')
-        scripts = json.loads(soup.find('script', type='application/ld+json').text)
-        cont['product_code'] = scripts['sku']
-        cont['selling_price'] = float(scripts['offers'][0]['price'])
-        cont['original_price'] = float(scripts['offers'][0]['price'])
-        cont['images'] = scripts['image']
-        if scripts['offers'][0]['availability'] == 'http://schema.org/InStock':
-            stock = True
-        else:
-            stock = False
-        cont['stock'] = stock
-        sizes = []
-        li = soup.find('main').find('div', class_='product parbase')
-        scripts = li.find('script')
-        data = (scripts.text.replace('\r', '').replace('\n', '').replace('\t', '').replace(' ', '').strip().split(
-            '\'sizes\''))
-        data = data[1:]
-        for i in data:
-            text = i[1:]
-            index = text.find(']')
-            try:
-                js = json.loads(text[0:index + 1].replace('\'', '\"'))
-                for j in js:
-                    if cont['product_code'] + j['size'] == j['sizeCode']:
-                        size = {'value': j['name'], 'stock': False, 'code': j['sizeCode']}
-                        sizes.append(size)
-            except:
-                pass
-        service = 'https://www2.hm.com/hmwebservices/service/product/tr/availability/%s.json' % cont['product_code'][
-                                                                                                0:-3]
-        h = get_html(service)
-        n = BeautifulSoup(h, 'lxml')
-        size_data = (json.loads(n.text))
-        new_sizes = []
-        for i in size_data['availability']:
-            for j in sizes:
-                if j['code'] == i:
-                    new_sizes.append(i)
-                    break
-        available = []
-        count = len(new_sizes)
-        for i in sizes:
-            flag = 0
-            for j in new_sizes:
-                if i['code'] == j:
-                    continue
-                else:
-                    flag += 1
-            if flag != count and i not in available:
-                available.append({'value': i['value'], 'stock': True, 'code': i['code']})
-            else:
-                available.append({'value': i['value'], 'stock': False, 'code': i['code']})
-        cont['sizes'] = available
+        href = \
+            soup.find('div', id='container').select('script')[2].text.split(
+                'window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
+                -1].strip()
+        data = (json.loads(href[:-1]))
+        cont = {
+            'id': context['id'],
+            'product': data['product'],
+        }
     except:
         pass
-    product['product'] = cont
-    return product
+    return cont
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=HANDM'
-    # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=HANDM'
-    # get_data({'url':'https://www2.hm.com/tr_tr/productpage.0568601006.html', 'id':0})
+    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=MRJN'
+    # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=koton'
     links = get_categories_from_db(url)
     length = (len(links))
     print(length, datetime.now())
@@ -494,14 +443,14 @@ def main():
     for i in range(ranges):
         range_links = (links[i * 40: (i + 1) * 40])
         if range_links:
-            with Pool(20) as p:
+            with Pool(40) as p:
                 data = (p.map(get_data, range_links))
                 all_products.extend(data)
 
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
-        pprint(r.status_code)
+        print(r.status_code)
         all_products = []
 
 

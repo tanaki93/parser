@@ -49,7 +49,7 @@ def get_data(context):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=BMBI'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=MRJN'
     # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=BMBI'
     links = get_categories_from_db(url)
     length = (len(links))
