@@ -495,7 +495,7 @@ def get_data(context):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=stradivarius'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=STRD'
     # data_url = 'https://www.bershka.com/tr/erkek/koleksi%CC%87yon/ceket/naylon/kap%C3%BC%C5%9Fonlu-%C5%9Fi%C5%9Fme-mont-c1010313016p102298758.html?category_id=1010313016&colorId=250'
     # data_url = 'https://www.stradivarius.com/tr/yeni-koleksiyon/ayakkab%C4%B1/%C3%BCr%C3%BCne-g%C3%B6re-al%C4%B1%C5%9Fveri%C5%9F/topuklu-ayakkab%C4%B1/bilekten-ba%C4%9Fc%C4%B1kl%C4%B1-topuklu-ayakkab%C4%B1-c1020048020p301540111.html?category_id=1020048020&colorId=040'
     # pprint(get_data({'url': data_url, 'id': 1}))

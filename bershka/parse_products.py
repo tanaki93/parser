@@ -491,7 +491,7 @@ def get_data(context):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=bershka'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=BRSHK'
     # data_url = 'https://www.bershka.com/tr/erkek/koleksi%CC%87yon/ceket/naylon/kap%C3%BC%C5%9Fonlu-%C5%9Fi%C5%9Fme-mont-c1010313016p102298758.html?category_id=1010313016&colorId=250'
     # pprint(get_data({'url': data_url, 'id': 1}))
     links = get_categories_from_db(url)

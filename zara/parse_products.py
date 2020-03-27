@@ -82,7 +82,7 @@ def get_data(context):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=zara'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=ZARA'
     # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=zara'
     links = get_categories_from_db(url)
     length = (len(links))

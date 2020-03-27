@@ -482,8 +482,8 @@ def get_data(context):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=handm'
-    # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=handm'
+    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=HANDM'
+    # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=HANDM'
     links = get_categories_from_db(url)
     length = (len(links))
     print(length, datetime.now())

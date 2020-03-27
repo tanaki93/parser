@@ -106,7 +106,7 @@ def get_data(context):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=handm'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=HANDM'
     # context = {
     #     'id': 1,
     #     'url':'https://www2.hm.com/tr_tr/productpage.0738736001.html'

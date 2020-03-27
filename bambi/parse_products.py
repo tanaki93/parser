@@ -28,6 +28,7 @@ def get_categories_from_db(url):
     html = get_html1(url)
     return json.loads(html)
 
+
 def get_data(context):
     cont = {}
     try:
@@ -48,8 +49,8 @@ def get_data(context):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=KTN'
-    # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=koton'
+    # url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=slazenger'
+    url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=BMBI'
     links = get_categories_from_db(url)
     length = (len(links))
     print(length)
@@ -67,7 +68,6 @@ def main():
                           data=json.dumps(all_products), headers=headers)
         print(r.status_code)
         all_products = []
-
 
 
 if __name__ == '__main__':
