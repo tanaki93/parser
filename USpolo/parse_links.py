@@ -61,8 +61,8 @@ def get_data_links(link):
 
 
 def main():
-    # url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=Marjin'
-    url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=Marjin'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=u'
+    # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=Marjin'
     categories = get_categories_from_db(url)
     all_links = []
     for category in categories:

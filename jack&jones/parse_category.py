@@ -97,7 +97,7 @@ def parse_brand_data(brand):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/brands/?brand=Marjin'
+    url = 'https://magicbox.izishop.kg/api/v1/project/brands/?brand=JackJones'
     # url = 'http://127.0.0.1:8000/api/v1/project/brands/?brand=Marjin'
     html = get_html1(url)
     brands = json.loads(html)

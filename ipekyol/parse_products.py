@@ -54,7 +54,7 @@ def get_data(context):
 def main():
     # get_data({'id': 0,
     #           'url': 'https://www.trendyol.com/marjin/beyaz-kadin-invo-duz-spor-19k00034ak710-p-32127609'})
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=MRJN'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=IPKL'
     # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=BMBI'
     links = get_categories_from_db(url)
     length = (len(links))

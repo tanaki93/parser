@@ -34,7 +34,7 @@ def get_data(context):
     cont = {}
     html = get_html(context['url'])
     soup = BeautifulSoup(html, 'lxml')
-    for i in range(2,4):
+    for i in range(1,4):
         try:
             href = \
                 soup.find('div', id='container').select('script')[i].text.split(
@@ -53,8 +53,8 @@ def get_data(context):
 
 def main():
     # get_data({'id': 0,
-    #           'url': 'https://www.trendyol.com/marjin/beyaz-kadin-invo-duz-spor-19k00034ak710-p-32127609'})
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=MRJN'
+    #           'url': 'https://www.trendyol.com/jack-jones/jack-jones-keten-sort-12118028-p-32739788'})
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=JJ'
     # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=BMBI'
     links = get_categories_from_db(url)
     length = (len(links))
