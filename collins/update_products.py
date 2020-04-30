@@ -473,7 +473,7 @@ def get_data(context):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=collins'
+    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=COLNS'
     # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=collins'
     links = get_categories_from_db(url)
     length = (len(links))
