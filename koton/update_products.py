@@ -415,22 +415,26 @@ def get_categories_from_db(url):
 
 def get_data(context):
     cont = {}
-    try:
-        html = get_html(context['url'])
-        soup = BeautifulSoup(html, 'lxml')
-        href = \
-            soup.find('div', id='container').select('script')[2].text.split(
-                'window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
-                -1].strip()
-        data = (json.loads(href[:-1]))
-        cont = {
-            'id': context['id'],
-            'product': data['product'],
-        }
-    except:
-        pass
-    return cont
 
+    html = get_html(context['url'])
+    soup = BeautifulSoup(html, 'lxml')
+    for i in range(1, 4):
+        data = None
+        try:
+            href = \
+                soup.find('div', id='container').select('script')[i].text.split(
+                    'window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
+                    -1].strip()
+            data = (json.loads(href[:-1]))
+        except:
+            pass
+        if data is not None:
+            cont = {
+                'id': context['id'],
+                'product': data['product'],
+            }
+            break
+    return cont
 
 def main():
     url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=KTN'
