@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
 import json
+import time
 from datetime import datetime
 from multiprocessing.dummy import Pool
 from random import choice
@@ -398,7 +399,6 @@ def get_html(url):
     # print(url)
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
-    # print(proxy)
     r = requests.get(url, headers=useragent, proxies=proxy)
     return r.text
 
@@ -420,6 +420,7 @@ def get_data(context):
     soup = BeautifulSoup(html, 'lxml')
     for i in range(1, 4):
         data = None
+        time.sleep(3)
         try:
             href = \
                 soup.find('div', id='container').select('script')[i].text.split(

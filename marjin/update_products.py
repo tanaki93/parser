@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
 import json
+import time
 from datetime import datetime
 from multiprocessing.dummy import Pool
 from random import choice
@@ -445,6 +446,7 @@ def main():
     ranges = length // 40 + 1
     all_products = []
     for i in range(ranges):
+        time.sleep(3)
         range_links = (links[i * 40: (i + 1) * 40])
         if range_links:
             with Pool(40) as p:

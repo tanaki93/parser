@@ -395,6 +395,7 @@ USERAGENTS = [
 
 
 def get_html(url):
+    print(url)
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
     r = requests.get(url, headers=useragent, proxies=proxy)

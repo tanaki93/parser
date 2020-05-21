@@ -420,72 +420,79 @@ def get_data(context):
         'id': context['id']
     }
     cont = {}
-    url = context['url']
-    category_id = url.split('category_id=')[1].split('&')[0]
-    colour_id = url.split('colorId=')[1].split('&category_id=')[0]
-    product_id = url.split('%s' % category_id)[1].split('.html')[0][1:]
-    product_json_url = 'https://www.bershka.com/itxrest/2/catalog/store/44109521/40259537/category/0/product/%s/detail?languageId=-43&appId=2' %product_id
-    # product_json_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/category/0/product/%s/detail?languageId=-43&appId=2' % product_id
-    html = get_html(product_json_url)
-    json_data = json.loads(html)
-    cont['name'] = json_data['name']
-    cont['stock'] = True
-    cont['product_id'] = product_id
-    cont['product_code'] = product_id
-    cont['description'] = json_data['detail']['longDescription']
-    static = 'https://static.bershka.net/4/photos2'
-    medias = json_data['detail']['xmedia']
-    images = []
-    for media in medias:
-        if int(media['colorCode']) == int(colour_id):
-            path = static + media['path'] + '/'
-            for xmedia in media['xmediaLocations'][0]['locations'][0]['mediaLocations']:
-                image = path + xmedia + '0.jpg'
-                images.append(image)
+    try:
+        url = context['url']
+        category_id = url.split('category_id=')[1].split('&')[0]
+        colour_id = url.split('colorId=')[1].split('&category_id=')[0]
+        product_id = url.split('%s' % category_id)[1].split('.html')[0][1:]
+        product_json_url = 'https://www.bershka.com/itxrest/2/catalog/store/44109521/40259537/category/0/product/%s/detail?languageId=-43&appId=2' %product_id
+        # product_json_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/category/0/product/%s/detail?languageId=-43&appId=2' % product_id
+        html = get_html(product_json_url)
+        json_data = json.loads(html)
+        cont['name'] = json_data['name']
+        cont['stock'] = True
+        cont['product_id'] = product_id
+        cont['product_code'] = product_id
+        cont['description'] = json_data['detail']['longDescription']
+        static = 'https://static.bershka.net/4/photos2'
+        medias = json_data['detail']['xmedia']
+        images = []
+        for media in medias:
+            if int(media['colorCode']) == int(colour_id):
+                path = static + media['path'] + '/'
+                for xmedia in media['xmediaLocations'][0]['locations'][0]['mediaLocations']:
+                    image = path + xmedia + '0.jpg'
+                    images.append(image)
+                break
+        image_text = ''
+        for image in images:
+            image_text = image_text + image + ' '
+        cont['images'] = image_text
+        product_sizes = []
+        for color in json_data['detail']['colors']:
+            if color['id'] == str(colour_id):
+                cont['colour'] = color['name']
+                product_sizes = color['sizes']
+                break
+        stock_url = 'https://www.bershka.com/itxrest/2/catalog/store/44109521/40259537/product/%s/stock?languageId=-43&appId=2'% product_id
+        stock_json = get_html(stock_url)
+        stock_data = json.loads(stock_json)
+        sizes = []
+        price = 0
+        for stock in stock_data['stocks']:
+            if stock['productId'] == int(product_id):
+                for product_stock in stock['stocks']:
+                    for product_size in product_sizes:
+                        if product_size['sku'] == product_stock['id']:
+                            stock_bool = False
+                            if product_stock['availability'] == 'in_stock':
+                                stock_bool = True
+                            else:
+                                continue
+                            size = {
+                                "value": product_size['name'],
+                                'stock': stock_bool
+                            }
+                            sizes.append(size)
+                            if int(product_size['price']) / 100 > price:
+                                price = int(product_size['price']) / 100
             break
-    image_text = ''
-    for image in images:
-        image_text = image_text + image + ' '
-    cont['images'] = image_text
-    product_sizes = []
-    for color in json_data['detail']['colors']:
-        if color['id'] == str(colour_id):
-            cont['colour'] = color['name']
-            product_sizes = color['sizes']
-            break
-    stock_url = 'https://www.bershka.com/itxrest/2/catalog/store/44109521/40259537/product/%s/stock?languageId=-43&appId=2'% product_id
-    stock_json = get_html(stock_url)
-    stock_data = json.loads(stock_json)
-    sizes = []
-    price = 0
-    for stock in stock_data['stocks']:
-        if stock['productId'] == int(product_id):
-            for product_stock in stock['stocks']:
-                for product_size in product_sizes:
-                    if product_size['sku'] == product_stock['id']:
-                        stock_bool = False
-                        if product_stock['availability'] == 'in_stock':
-                            stock_bool = True
-                        else:
-                            continue
-                        size = {
-                            "value": product_size['name'],
-                            'stock': stock_bool
-                        }
-                        sizes.append(size)
-                        if int(product_size['price']) / 100 > price:
-                            price = int(product_size['price']) / 100
-        break
-    data_size = []
-    for i in sizes:
-        if i not in data_size:
-            data_size.append(i)
-    cont['sizes'] = data_size
-    if len(data_size) == 0:
-        cont['stock'] = False
-    cont['selling_price'] = price
-    cont['discount_price'] = price
-    cont['original_price'] = price
+        data_size = []
+        for i in sizes:
+            if i not in data_size:
+                data_size.append(i)
+        cont['sizes'] = data_size
+        if len(data_size) == 0:
+            cont['stock'] = False
+        cont['selling_price'] = price
+        cont['discount_price'] = price
+        cont['original_price'] = price
+    except:
+        pass
+    if cont == {}:
+        product_dict = {
+            'id': 0,
+        }
     product_dict['product'] = cont
     return product_dict
 
@@ -501,12 +508,11 @@ def main():
     ranges = length // 40 + 1
     all_products = []
     for i in range(ranges):
-        print(i)
         range_links = (links[i * 40: (i + 1) * 40])
         with Pool(40) as p:
             data = p.map(get_data, range_links)
             all_products.extend(data)
-            # time.sleep(random.uniform(1, 3))
+            time.sleep(random.uniform(1, 3))
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)

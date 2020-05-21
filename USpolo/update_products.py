@@ -415,7 +415,6 @@ def get_categories_from_db(url):
 
 def get_data(context):
     cont = {}
-
     html = get_html(context['url'])
     soup = BeautifulSoup(html, 'lxml')
     for i in range(1, 4):

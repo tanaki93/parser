@@ -3,6 +3,7 @@
 import json
 from datetime import datetime
 from multiprocessing.dummy import Pool
+from pprint import pprint
 from random import choice
 
 import requests
@@ -420,15 +421,11 @@ def get_data(context):
         main_data = soup.find('div', id='page-container').find('section', id='main').find('section', id='product')
         script = main_data.find('script').contents[0]
         script = json.loads(script, strict=False)
-        images_data = main_data.find('div', class_='product-images-section _product-images-section') \
-            .find('div', class_='big-image-container _big-image-container').find('div', id='main-images').find_all(
-            'div',
-            class_='media-wrap')
-        images = []
-        form = main_data.find('form')
         sizes = []
-        for i in (form.find('div', class_='size-select _size-select').find_all('label', class_='product-size')):
-            input = i.find('div', class_='aria-size-input').find('input')
+        form = main_data.find('form').find('fieldset').find_all('div')[1].find_all('div')[0].find_all('label')
+        pprint(form)
+        for i in form:
+            input = i.find('div').find('input')
             size = {
                 'value': input['value']
             }
@@ -443,9 +440,7 @@ def get_data(context):
                 size['stock'] = False
             sizes.append(size)
         info = script[0]
-        for i in images_data:
-            images.append(i.find('a', class_='_seoImg main-image')['href'])
-        product['images'] = images
+        product['images'] = script[0]['image']
         product['selling_price'] = float(info['offers']['price'])
         product['original_price'] = float(info['offers']['price'])
         product['sizes'] = sizes
@@ -455,6 +450,10 @@ def get_data(context):
         }
     except:
         pass
+    if cont == {}:
+        cont['id'] = context['id']
+        cont['product'] = None
+    print(context['id'])
     return cont
 
 
@@ -462,6 +461,13 @@ def main():
     url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=ZARA'
     # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=zara'
     links = get_categories_from_db(url)
+    # links = [{
+    #     "id": 68115,
+    #     "url": "https://www.zara.com/tr/tr/saten-mi%CC%87ni%CC%87-elbi%CC%87se-p02363762.html",
+    #     "status": 4,
+    #     "updated_at": "2020-04-30T20:48:41.982918Z",
+    #     "tr_category": 312
+    # }]
     length = (len(links))
     print(length, datetime.now())
     ranges = length // 40 + 1
