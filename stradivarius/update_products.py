@@ -428,6 +428,7 @@ def get_data(context):
         product_json_url = 'https://www.stradivarius.com/itxrest/2/catalog/store/54009571/50331081/category/0/product/%s/detail?languageId=-43&appId=2' %product_id
         # product_json_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/category/0/product/%s/detail?languageId=-43&appId=2' % product_id
         html = get_html(product_json_url)
+        pprint(html)
         json_data = json.loads(html)
         cont['name'] = json_data['name']
         cont['stock'] = True
@@ -508,7 +509,7 @@ def main():
     ranges = length // 40 + 1
     all_products = []
     for i in range(ranges):
-        print(i)
+        # print(i)
         range_links = (links[i * 40: (i + 1) * 40])
         with Pool(40) as p:
             data = p.map(get_data, range_links)

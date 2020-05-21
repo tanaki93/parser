@@ -428,7 +428,6 @@ def get_data(context):
         product_json_url = 'https://www.bershka.com/itxrest/2/catalog/store/44109521/40259537/category/0/product/%s/detail?languageId=-43&appId=2' %product_id
         # product_json_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/category/0/product/%s/detail?languageId=-43&appId=2' % product_id
         html = get_html(product_json_url)
-        print(html)
         json_data = json.loads(html)
         cont['name'] = json_data['name']
         cont['stock'] = True
@@ -495,7 +494,6 @@ def get_data(context):
             'id': 0,
         }
     product_dict['product'] = cont
-    print(product_dict)
     return product_dict
 
 
