@@ -480,6 +480,8 @@ def get_data(context):
         cont['original_price'] = price
     except:
         pass
+    if cont == {}:
+        product_dict['id'] = 0
     product_dict['product'] = cont
     # print(context['url'])
     return product_dict
