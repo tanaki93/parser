@@ -484,6 +484,7 @@ def get_data(context):
         product_dict['id'] = 0
     product_dict['product'] = cont
     # print(context['url'])
+    # pprint(product_dict)
     return product_dict
 
 
@@ -496,11 +497,11 @@ def main():
     length = length//2
     links = links[0:length+1]
     print(length, datetime.now())
-    ranges = length // 40 + 1
+    ranges = length // 10 + 1
     all_products = []
     for i in range(ranges):
         # print(i)
-        range_links = (links[i * 40: (i + 1) * 40])
+        range_links = (links[i * 10: (i + 1) * 10])
         for k in range_links:
             all_products.append(get_data(k))
             time.sleep(random.uniform(1, 2))
@@ -509,6 +510,7 @@ def main():
                           data=json.dumps(all_products), headers=headers)
         print(r.status_code)
         all_products = []
+        # break
 
 
 if __name__ == '__main__':
