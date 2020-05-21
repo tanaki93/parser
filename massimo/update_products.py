@@ -425,6 +425,7 @@ def get_data(context):
     product_id = url.split('%s' % category_id)[1].split('.html')[0][1:]
     product_json_url = 'https://www.massimodutti.com/itxrest/2/catalog/store/34009471/30359503/category/0/product/%s/detail?languageId=-43&appId=2' % product_id
     html = get_html(product_json_url)
+    pprint(html)
     json_data = json.loads(html)
     cont['name'] = json_data['name']
     cont['stock'] = True
@@ -503,6 +504,7 @@ def main():
         for k in range_links:
             all_products.append(get_data(k))
             time.sleep(random.uniform(1, 2))
+            break
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
