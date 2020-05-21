@@ -396,7 +396,7 @@ USERAGENTS = [
 
 
 def get_html(url):
-    print(url)
+    # print(url)
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
     r = requests.get(url, headers=useragent, proxies=proxy)
@@ -501,7 +501,7 @@ def main():
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
-        pprint(r.status_code)
+        # pprint(r.status_code)
         all_products = []
 
 

@@ -456,7 +456,7 @@ def main():
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
-        print(r.status_code)
+        # print(r.status_code)
         all_products = []
 
 

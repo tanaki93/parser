@@ -478,7 +478,7 @@ def get_data(context):
     cont['discount_price'] = price
     cont['original_price'] = price
     product_dict['product'] = cont
-    print(context['url'])
+    # print(context['url'])
     return product_dict
 
 
@@ -494,7 +494,7 @@ def main():
     ranges = length // 40 + 1
     all_products = []
     for i in range(ranges):
-        print(i)
+        # print(i)
         range_links = (links[i * 40: (i + 1) * 40])
         for k in range_links:
             all_products.append(get_data(k))
@@ -502,7 +502,7 @@ def main():
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
-        print(r.status_code)
+        # print(r.status_code)
         all_products = []
 
 

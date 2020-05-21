@@ -453,7 +453,7 @@ def get_data(context):
     if cont == {}:
         cont['id'] = context['id']
         cont['product'] = None
-    print(context['id'])
+    # print(context['id'])
     return cont
 
 
@@ -482,7 +482,7 @@ def main():
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
-        print(r.status_code)
+        # print(r.status_code)
         all_products = []
         # break
 
