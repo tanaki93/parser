@@ -484,7 +484,7 @@ def get_data(context):
         product_dict['id'] = 0
     product_dict['product'] = cont
     # print(context['url'])
-    # pprint(product_dict)
+    pprint(product_dict)
     return product_dict
 
 
@@ -510,7 +510,7 @@ def main():
                           data=json.dumps(all_products), headers=headers)
         print(r.status_code)
         all_products = []
-        # break
+        break
 
 
 if __name__ == '__main__':
