@@ -2,6 +2,7 @@
 # -*- coding: utf-8
 import json
 from multiprocessing.dummy import Pool
+from pprint import pprint
 from random import choice
 
 import requests
@@ -31,28 +32,26 @@ def get_categories_from_db(url):
 
 def get_data(context):
     cont = {}
-    html = get_html(context['url'])
-    soup = BeautifulSoup(html, 'lxml')
-    for i in range(2, 4):
-        try:
-            href = \
-                soup.find('div', id='container').select('script')[i].text.split(
-                    'window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
-                    -1].strip()
-            data = (json.loads(href[:-1]))
-            cont = {
-                'id': context['id'],
-                'product': data['product'],
-            }
-            break
-        except:
-            pass
+    try:
+        html = get_html(context['url'])
+        soup = BeautifulSoup(html, 'lxml')
+        href = \
+            soup.find('div', id='container').select('script')[2].text.split(
+                'window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
+                -1].strip()
+        data = (json.loads(href[:-1]))
+        cont = {
+            'id': context['id'],
+            'product': data['product'],
+        }
+    except:
+        pass
     return cont
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=SLZNG'
-    # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=koton'
+    url = 'https://magicbox.izishop.kg/api/v1/project/links/?brand=TAS'
+    # url = 'http://127.0.0.1:8000/api/v1/project/links/?brand=BMBI'
     links = get_categories_from_db(url)
     length = (len(links))
     print(length)
@@ -70,6 +69,7 @@ def main():
                           data=json.dumps(all_products), headers=headers)
         print(r.status_code)
         all_products = []
+        # break
 
 
 if __name__ == '__main__':

@@ -31,20 +31,22 @@ def get_categories_from_db(url):
 
 def get_data(context):
     cont = {}
-    try:
-        html = get_html(context['url'])
-        soup = BeautifulSoup(html, 'lxml')
-        href = \
-            soup.find('div', id='container').select('script')[2].text.split(
-                'window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
-                -1].strip()
-        data = (json.loads(href[:-1]))
-        cont = {
-            'id': context['id'],
-            'product': data['product'],
-        }
-    except:
-        pass
+    html = get_html(context['url'])
+    soup = BeautifulSoup(html, 'lxml')
+    for i in range(2, 4):
+        try:
+            href = \
+                soup.find('div', id='container').select('script')[i].text.split(
+                    'window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
+                    -1].strip()
+            data = (json.loads(href[:-1]))
+            cont = {
+                'id': context['id'],
+                'product': data['product'],
+            }
+            break
+        except:
+            pass
     return cont
 
 

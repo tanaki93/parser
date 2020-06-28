@@ -4,12 +4,12 @@ import requests
 
 headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
-url = 'http://127.0.0.1:8000/api/v1/vk/'
+url = 'https://tamak.pixelkalpak.com/api/v1/code/'
 myobj = {
-    'access_token': '6727f01f67177eb0fedd42726f60b69543ee623b2a644e7a966ff3627fec9d88fc1b756ab160c561c7d95'
+    'code': '9286',
 }
 
-x = requests.post(url, data=json.dumps(myobj), headers=headers)
+x = requests.get(url, data=json.dumps(myobj), headers=headers)
 
 print(x.text)
 

@@ -34,7 +34,7 @@ def get_data(context):
     cont = {}
     html = get_html(context['url'])
     soup = BeautifulSoup(html, 'lxml')
-    for i in range(2,4):
+    for i in range(2, 4):
         try:
             href = \
                 soup.find('div', id='container').select('script')[i].text.split(

@@ -12,6 +12,7 @@ def get_html(url):
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
     r = requests.get(url, headers=useragent, proxies=proxy)
+    print(url)
     return r.text
 
 
@@ -27,12 +28,12 @@ def get_categories_from_db(url):
 
 def get_pages_count(html):
     soup = BeautifulSoup(html, 'lxml')
-    href = 0
+    href = 200
     try:
-        href = soup.find('div', class_='srch-ttl-cntnr-wrppr').find('div', class_='dscrptn').text.split(' ')[-3]
+        href = int(soup.find('div', class_='srch-ttl-cntnr-wrppr').find('div', class_='dscrptn').text.split(' ')[-3])
     except:
         pass
-    return int(href)
+    return href
 
 
 def get_links(count, link):
@@ -54,16 +55,18 @@ def get_data_links(link):
         pass
     links = []
     for i in data:
-        href = 'https://www.trendyol.com' + (i.find('a', class_='p-card-chldrn-cntnr')['href'].split('?')[0])
+        href = 'https://www.trendyol.com' + (i.find('div', class_='p-card-chldrn-cntnr').find('a')['href'])
         links.append(href)
+
     return links
 
 
 def main():
-    url = 'http://188.120.242.218:8089/api/v1/project/categories/?brand=koton'
-    # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=koton'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=KTN'
+    # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=Marjin'
     categories = get_categories_from_db(url)
     all_links = []
+    categories = categories[::-1]
     for category in categories:
         link = category['link']
         print(link)
@@ -86,7 +89,6 @@ def main():
         print(r.status_code)
         all_links = []
         # time.sleep(3)
-
 
 if __name__ == '__main__':
     main()

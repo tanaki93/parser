@@ -428,7 +428,6 @@ def get_data(context):
         cont['product_code'] = scripts['sku']
         cont['selling_price'] = float(scripts['offers'][0]['price'])
         cont['original_price'] = float(scripts['offers'][0]['price'])
-        cont['images'] = scripts['image']
         if scripts['offers'][0]['availability'] == 'http://schema.org/InStock':
             stock = True
         else:
@@ -501,7 +500,7 @@ def main():
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
-        # pprint(r.status_code)
+        pprint(r.status_code)
         all_products = []
 
 

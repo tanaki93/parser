@@ -50,7 +50,7 @@ def get_data(category):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=collins'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=COLNS'
     html = get_html1(url)
     categories = json.loads(html)
     all_links = []

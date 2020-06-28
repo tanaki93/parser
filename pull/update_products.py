@@ -398,7 +398,6 @@ USERAGENTS = [
 
 
 def get_html(url):
-    print(url)
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
     r = requests.get(url, headers=useragent, proxies=proxy)
@@ -416,85 +415,104 @@ def get_categories_from_db(url):
 
 
 def get_data(context):
+    product_dict = {
+        'id': context['id']
+    }
     cont = {}
     try:
-        html = get_html(context['url'])
-        soup = BeautifulSoup(html, 'lxml')
-        product = {}
-        main_data = soup.find('div', id='page-container').find('section', id='main').find('section', id='product')
-        script = main_data.find('script').contents[0]
-        script = json.loads(script, strict=False)
-        sizes = []
-        form = main_data.find('form').find('fieldset').find_all('div')[1].find_all('div')[0].find_all('label')
-        for i in form:
-            input = i.find('div').find('input')
-            size = {
-                'value': input['value']
-            }
-            disabled = None
-            try:
-                disabled = input['disabled']
-            except:
-                pass
-            if disabled is None:
-                size['stock'] = True
-            else:
-                size['stock'] = False
-            sizes.append(size)
-        info = script[0]
-        product['images'] = script[0]['image']
-        for i in range(21, 24):
-            try:
-                colour = soup.select('script')[i].text
-                json_data = colour.split('window.zara.appConfig = ')
-                product['original_price'] = float(json_data[-1].split('oldPrice')[-1].split(',')[0][2:])/100
+        url = context['url']
+        product_id = url.split('-c')[-1].split('p')[-1].split('.html')[0]
+        colour_id = url.split('.html?cS=')[-1]
+        category_id = url.split('-c')[-1].split('p')[0]
+        product_json_url = 'https://www.pullandbear.com/itxrest/2/catalog/store/25009521/20309411/category/0/product/%s/detail?languageId=-43&appId=1' % product_id
+        html = get_html(product_json_url)
+        json_data = json.loads(html)
+        cont['stock'] = True
+        static = 'https://static.pullandbear.net/2/photos'
+        medias = json_data['bundleProductSummaries'][0]['detail']['xmedia']
+        images = []
+        for media in medias:
+            if media['colorCode'] == str(colour_id):
+                path = static + media['path'] + '/'
+                m = media['path'].split('/')[-3:]
+                t = ''
+                for n in m:
+                    t = t + n
+                for xmedia in media['xmediaItems'][0]['medias']:
+                    split = xmedia['idMedia'].split('_')
+                    z = t
+                    for s in split[1:]:
+                        z = z + '_' + s
+                    image = path + z + '8.jpg?t=' + str(
+                        xmedia['timestamp'])
+                    images.append(image)
+                    z = ''
                 break
-            except:
-                product['original_price'] = float(info['offers']['price'])
-                pass
 
-        product['selling_price'] = float(info['offers']['price'])
-        product['sizes'] = sizes
-        cont = {
-            'id': context['id'],
-            'product': product
-        }
+        image_text = ''
+        for image in images:
+            image_text = image_text + image + ' '
+        cont['images'] = image_text
+        product_sizes = []
+        for color in json_data['bundleProductSummaries'][0]['detail']['colors']:
+            if color['id'] == str(colour_id):
+                cont['colour'] = color['name']
+                product_sizes = color['sizes']
+                break
+        stock_url = 'https://www.pullandbear.com/itxrest/2/catalog/store/25009521/20309411/product/%s/stock?languageId=-43&appId=1' % product_id
+        stock_json = get_html(stock_url)
+        stock_data = json.loads(stock_json)
+        sizes = []
+        price = 0
+        for stock in stock_data['stocks']:
+            if stock['productId'] == int(product_id):
+                for product_stock in stock['stocks']:
+                    for product_size in product_sizes:
+                        if product_size['sku'] == product_stock['id']:
+                            stock_bool = False
+                            if product_stock['availability'] == 'in_stock':
+                                stock_bool = True
+                            size = {
+                                "value": product_size['name'],
+                                'stock': stock_bool
+                            }
+                            sizes.append(size)
+                            if int(product_size['price']) / 100 > price:
+                                price = int(product_size['price']) / 100
+            break
+        cont['sizes'] = sizes
+        cont['selling_price'] = price
+        cont['discount_price'] = price
+        cont['original_price'] = price
     except:
+        cont = None
         pass
-    if cont == {}:
-        cont['id'] = context['id']
-        cont['product'] = None
-    pprint(cont)
-    return cont
+    product_dict['product'] = cont
+    return product_dict
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=ZARA'
-    # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=zara'
+    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=PLLBR'
+    # data_url = 'https://www.pullandbear.com/tr/kad%C4%B1n/giyim/t-shirtler/basic-fitilli-ask%C4%B1l%C4%B1-body-c29020p502184763.html?cS=612'
+    # print(get_data({'url': data_url, 'id': 1}))
     links = get_categories_from_db(url)
-    # links = [{
-    #     "id": 68115,
-    #     "url": "https://www.zara.com/tr/tr/suni%CC%87-k%C3%BCrk-baliksirti-kaban-p03046022.html",
-    #     "status": 4,
-    #     "updated_at": "2020-04-30T20:48:41.982918Z",
-    #     "tr_category": 312
-    # }]
     length = (len(links))
-    print(length, datetime.now())
-    ranges = length // 40 + 1
+    print(length)
+    ranges = length // 10 + 1
     all_products = []
+    get_data(links[0])
     for i in range(ranges):
-        range_links = (links[i * 40: (i + 1) * 40])
+        range_links = (links[i * 10: (i + 1) * 10])
         if range_links:
             with Pool(20) as p:
                 data = (p.map(get_data, range_links))
                 all_products.extend(data)
-
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
         print(r.status_code)
         all_products = []
+        time.sleep(3)
 
 
 if __name__ == '__main__':

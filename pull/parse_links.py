@@ -1,4 +1,5 @@
 import json
+import time
 from multiprocessing.dummy import Pool
 from pprint import pprint
 from random import choice
@@ -27,7 +28,7 @@ def get_categories_from_db(url):
 
 
 def get_data_links(category):
-    project_url = 'https://www.stradivarius.com/itxrest/2/catalog/store/54009571/50331081/category/%s/product?languageId=-43&appId=2'
+    project_url = 'https://www.pullandbear.com/itxrest/3/catalog/store/25009521/20309411/category/%s/product?languageId=-43&showProducts=false&appId=1'
     link = category['link']
     category_id = link.split('-c')[-1].split('.html')[0]
     url = (project_url % category_id)
@@ -38,48 +39,51 @@ def get_data_links(category):
     n_category = {
         'category_id': category['id']
     }
-    n_links = []
+    ids = []
     text = ''
     for i in links:
         text += i
+    for id in json_data['productIds']:
+        ids.append(id)
+    pprint(len(ids))
+    new_url = 'https://www.pullandbear.com/itxrest/3/catalog/store/25009521/20309411/productsArray?productIds=%s&languageId=-43&categoryId=1030061504&appId=1'
+    url_text = str(ids[0])
+    for i in range(1, len(ids)):
+        url_text += '%2C' + str(ids[i])
+    html = get_html(new_url % url_text)
+    soup = BeautifulSoup(html, 'lxml')
+    json_data = json.loads(soup.text)
+    n_links = []
     for category_obj in json_data['products']:
+        colorId = category_obj['mainColorid']
         product_urls = category_obj['productUrl']
-        if len(category_obj['bundleProductSummaries']) > 0:
-            id = category_obj['bundleProductSummaries'][0]['id']
-            detail = category_obj['bundleProductSummaries'][0]['detail']
-        else:
-            id = category_obj['id']
-            detail = category_obj['detail']
         product_url = ''
         for i in product_urls.split('-')[0:-1]:
             product_url += (i + '-')
         product_url = product_url[0:-1]
-        for i in detail['colors']:
-            new_text = text + '/' + product_url + '-c' + category_id + 'p' + str(id) + '.html' + '?colorId=' + i[
-                'id'] + '&category_id=' + category_id
-            if new_text not in n_links:
-                n_links.append(new_text)
-
+        new_text = text + '/' + product_url + '-c' + category_id + 'p' + str(
+            category_obj['id']) + '.html' + '?cS=' + str(colorId)
+        n_links.append(new_text)
     n_category['links'] = n_links
+    pprint(n_category)
     return n_category
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=STRD'
-    # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=stradivarius'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=PLLBR'
     html = get_html1(url)
     soup = BeautifulSoup(html, 'lxml')
     json_data = json.loads(soup.text)
-    all_links = []
+    array_links = []
     for i in json_data:
-        all_links.append(get_data_links(i))
+        array_links.append(get_data_links(i))
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
-                          data=json.dumps(all_links), headers=headers)
+                          data=json.dumps(array_links), headers=headers)
         print(r.status_code)
-        # pprint(all_links)
+        array_links = []
+        time.sleep(2)
         # break
-        all_links = []
 
 
 if __name__ == '__main__':

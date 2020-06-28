@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
 import json
-import random
-import time
 from datetime import datetime
 from multiprocessing.dummy import Pool
-from pprint import pprint
 from random import choice
 
 import requests
@@ -398,9 +395,10 @@ USERAGENTS = [
 
 
 def get_html(url):
-    print(url)
+    # print(url)
     proxy = {'http': 'http://' + choice(PROXIES)}
     useragent = {'User-Agent': choice(USERAGENTS)}
+    # print(proxy)
     r = requests.get(url, headers=useragent, proxies=proxy)
     return r.text
 
@@ -417,68 +415,32 @@ def get_categories_from_db(url):
 
 def get_data(context):
     cont = {}
-    try:
-        html = get_html(context['url'])
-        soup = BeautifulSoup(html, 'lxml')
-        product = {}
-        main_data = soup.find('div', id='page-container').find('section', id='main').find('section', id='product')
-        script = main_data.find('script').contents[0]
-        script = json.loads(script, strict=False)
-        sizes = []
-        form = main_data.find('form').find('fieldset').find_all('div')[1].find_all('div')[0].find_all('label')
-        for i in form:
-            input = i.find('div').find('input')
-            size = {
-                'value': input['value']
-            }
-            disabled = None
-            try:
-                disabled = input['disabled']
-            except:
-                pass
-            if disabled is None:
-                size['stock'] = True
-            else:
-                size['stock'] = False
-            sizes.append(size)
-        info = script[0]
-        product['images'] = script[0]['image']
-        for i in range(21, 24):
-            try:
-                colour = soup.select('script')[i].text
-                json_data = colour.split('window.zara.appConfig = ')
-                product['original_price'] = float(json_data[-1].split('oldPrice')[-1].split(',')[0][2:])/100
-                break
-            except:
-                product['original_price'] = float(info['offers']['price'])
-                pass
 
-        product['selling_price'] = float(info['offers']['price'])
-        product['sizes'] = sizes
-        cont = {
-            'id': context['id'],
-            'product': product
-        }
-    except:
-        pass
-    if cont == {}:
-        cont['id'] = context['id']
-        cont['product'] = None
-    pprint(cont)
+    html = get_html(context['url'])
+    soup = BeautifulSoup(html, 'lxml')
+    for i in range(1, 4):
+        data = None
+        try:
+            href = \
+                soup.find('div', id='container').select('script')[i].text.split(
+                    'window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ = ')[
+                    -1].strip()
+            data = (json.loads(href[:-1]))
+        except:
+            pass
+        if data is not None:
+            cont = {
+                'id': context['id'],
+                'product': data['product'],
+            }
+            break
     return cont
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=ZARA'
-    # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=zara'
+    url = 'https://magicbox.izishop.kg/api/v1/project/update/links/?brand=BMBI'
+    # url = 'http://127.0.0.1:8000/api/v1/project/update/links/?brand=koton'
     links = get_categories_from_db(url)
-    # links = [{
-    #     "id": 68115,
-    #     "url": "https://www.zara.com/tr/tr/suni%CC%87-k%C3%BCrk-baliksirti-kaban-p03046022.html",
-    #     "status": 4,
-    #     "updated_at": "2020-04-30T20:48:41.982918Z",
-    #     "tr_category": 312
-    # }]
     length = (len(links))
     print(length, datetime.now())
     ranges = length // 40 + 1
@@ -486,14 +448,14 @@ def main():
     for i in range(ranges):
         range_links = (links[i * 40: (i + 1) * 40])
         if range_links:
-            with Pool(20) as p:
+            with Pool(40) as p:
                 data = (p.map(get_data, range_links))
                 all_products.extend(data)
 
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_products), headers=headers)
-        print(r.status_code)
+        # print(r.status_code)
         all_products = []
 
 

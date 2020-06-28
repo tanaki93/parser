@@ -55,13 +55,14 @@ def get_data_links(link):
         pass
     links = []
     for i in data:
-        href = 'https://www.trendyol.com' + (i.find('a', class_='p-card-chldrn-cntnr')['href'].split('?')[0])
+        href = 'https://www.trendyol.com' + (i.find('div', class_='p-card-chldrn-cntnr').find('a')['href'])
         links.append(href)
+
     return links
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=u'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=USPL'
     # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=Marjin'
     categories = get_categories_from_db(url)
     all_links = []

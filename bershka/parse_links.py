@@ -63,7 +63,7 @@ def get_data_links(category):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=bershka'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=BRSHK'
     html = get_html1(url)
     soup = BeautifulSoup(html, 'lxml')
     json_data = json.loads(soup.text)

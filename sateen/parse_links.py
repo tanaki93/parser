@@ -1,5 +1,6 @@
 import json
 from multiprocessing.dummy import Pool
+from pprint import pprint
 from random import choice
 
 import requests
@@ -22,6 +23,7 @@ def get_html1(url):
 
 
 def get_categories_from_db(url):
+    print(url)
     html = get_html1(url)
     return json.loads(html)
 
@@ -62,7 +64,7 @@ def get_data_links(link):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=BMBI'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=STN'
     # url = 'http://127.0.0.1:8000/api/v1/project/categories/?brand=Bambi'
     categories = get_categories_from_db(url)
     all_links = []
@@ -81,7 +83,6 @@ def main():
                 category_links.extend(i)
         context['links'] = category_links
         all_links.append(context)
-        # break
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         r = requests.post(url,
                           data=json.dumps(all_links), headers=headers)

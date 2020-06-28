@@ -65,17 +65,17 @@ def get_data_links(category):
 
 
 def main():
-    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=massimo'
+    url = 'https://magicbox.izishop.kg/api/v1/project/categories/?brand=MDT'
     html = get_html1(url)
     soup = BeautifulSoup(html, 'lxml')
     json_data = json.loads(soup.text)
     all_links = []
     for i in json_data:
         all_links.append(get_data_links(i))
-        # headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-        # r = requests.post(url,
-        #                   data=json.dumps(all_links), headers=headers)
-        # print(r.status_code)
+        headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
+        r = requests.post(url,
+                          data=json.dumps(all_links), headers=headers)
+        print(r.status_code)
 
         all_links = []
 
